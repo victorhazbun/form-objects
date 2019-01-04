@@ -1,0 +1,28 @@
+<%= form_for(@form, url: update_user_with_social_networks_path, method: :put) do |f| %>
+  <% if @form.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@form.errors.count, "error") %> prohibited this User from being saved:</h2>
+      <ul>
+        <% @form.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_name %>
+    <%= f.text_field :user_name %>
+  </div>
+
+  <%= f.fields_for :social_networks, @social_networks do |sn_form| %>
+    <div class="field">
+      <%= sn_form.label :url %>
+      <%= sn_form.text_field :url %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
